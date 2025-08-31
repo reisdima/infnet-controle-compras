@@ -1,0 +1,3 @@
+Detergente;Ype;123344449;500;ml;4.89;limpeza
+Papel Higiênico;Neve;78988798;12;unidade;18.50;higiene
+Ração para gato;Purina;44565446;1;kg;22.80;pet

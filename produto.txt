@@ -1,3 +1,0 @@
-Leite;Porto Alegre;1234567;500;ml;4.89
-Pipoca Doce;Kerus;6555646;1;unidade;3.50
-Bombom;Lacta;33444535;1;unidade;2.30

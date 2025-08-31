@@ -1,7 +1,8 @@
 package br.edu.infnet.caiovincenzo;
 
 import br.edu.infnet.caiovincenzo.model.domain.Produto;
-import br.edu.infnet.caiovincenzo.model.service.ProdutoService;
+import br.edu.infnet.caiovincenzo.model.domain.ProdutoGeral;
+import br.edu.infnet.caiovincenzo.model.service.ProdutoGeralService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -11,16 +12,16 @@ import java.io.FileReader;
 import java.util.List;
 
 @Component
-public class ProdutoLoader implements ApplicationRunner {
-    private final ProdutoService produtoService;
+public class ProdutoGeralLoader implements ApplicationRunner {
+    private final ProdutoGeralService produtoGeralService;
 
-    public ProdutoLoader(ProdutoService produtoService) {
-        this.produtoService = produtoService;
+    public ProdutoGeralLoader(ProdutoGeralService produtoGeralService) {
+        this.produtoGeralService = produtoGeralService;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        FileReader arquivo = new FileReader("produto.txt");
+        FileReader arquivo = new FileReader("produtoGeral.txt");
         BufferedReader leitura = new BufferedReader(arquivo);
 
         String linha = leitura.readLine();
@@ -31,21 +32,22 @@ public class ProdutoLoader implements ApplicationRunner {
 
             campos = linha.split(";");
 
-            Produto produto = new Produto();
+            ProdutoGeral produto = new ProdutoGeral();
             produto.setNome(campos[0]);
             produto.setMarca(campos[1]);
             produto.setCodigoDeBarras(campos[2]);
             produto.setQuantidade(Integer.valueOf(campos[3]));
             produto.setUnidade(campos[4]);
             produto.setPreco(Double.parseDouble(campos[5]));
+            produto.setCategoria(campos[6]);
 
 
-            produtoService.incluir(produto);
+            produtoGeralService.incluir(produto);
 
             linha = leitura.readLine();
         }
 
-        List<Produto> produtos = produtoService.obterLista();
+        List<ProdutoGeral> produtos = produtoGeralService.obterLista();
         produtos.forEach(System.out::println);
 
         leitura.close();

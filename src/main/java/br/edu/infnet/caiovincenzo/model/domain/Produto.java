@@ -1,6 +1,6 @@
 package br.edu.infnet.caiovincenzo.model.domain;
 
-public class Produto {
+public abstract class Produto {
 
     private Integer id;
     private String nome;
@@ -13,8 +13,10 @@ public class Produto {
 
     @Override
     public String toString() {
-        return String.format("Produto - %d, %s, %s, %s, %s, %s, %.2f", id, nome, marca, codigoDeBarras, quantidade, unidade, preco);
+        return String.format(" - %d, %s, %s, %s, %s, %s, %.2f", id, nome, marca, codigoDeBarras, quantidade, unidade, preco);
     }
+
+    public abstract String obterTipo();
 
     public Integer getId() {
         return id;
