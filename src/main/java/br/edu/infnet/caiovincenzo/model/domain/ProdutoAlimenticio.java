@@ -1,5 +1,8 @@
 package br.edu.infnet.caiovincenzo.model.domain;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class ProdutoAlimenticio extends Produto {
 
     private boolean perecivel;

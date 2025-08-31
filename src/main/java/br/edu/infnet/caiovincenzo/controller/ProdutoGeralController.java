@@ -1,8 +1,9 @@
 package br.edu.infnet.caiovincenzo.controller;
 
-import br.edu.infnet.caiovincenzo.model.domain.Produto;
 import br.edu.infnet.caiovincenzo.model.domain.ProdutoGeral;
 import br.edu.infnet.caiovincenzo.model.service.ProdutoGeralService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,33 +19,49 @@ public class ProdutoGeralController {
     }
 
     @GetMapping
-    public List<ProdutoGeral> obterLista() {
-        return produtoGeralService.obterLista();
+    public ResponseEntity<List<ProdutoGeral>> obterLista() {
+
+        List<ProdutoGeral> lista = produtoGeralService.obterLista();
+        if (lista.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/{id}")
-    public ProdutoGeral obterPorId(@PathVariable Integer id) {
-        return produtoGeralService.obterPorId(id);
+    public ResponseEntity<ProdutoGeral> obterPorId(@PathVariable Integer id) {
+        ProdutoGeral produto = produtoGeralService.obterPorId(id);
+        if (produto == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(produto);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void excluir(@PathVariable Integer id) {
+    public ResponseEntity<Void> excluir(@PathVariable Integer id) {
         produtoGeralService.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping
-    public ProdutoGeral incluir(@RequestBody ProdutoGeral produto) {
-        return produtoGeralService.incluir(produto);
+    public ResponseEntity<ProdutoGeral> incluir(@RequestBody ProdutoGeral produto) {
+        ProdutoGeral novoProduto = produtoGeralService.incluir(produto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoProduto);
     }
 
     @PutMapping(value = "/{id}")
-    public ProdutoGeral alterar(@PathVariable Integer id, @RequestBody ProdutoGeral produto) {
-        return produtoGeralService.alterar(id, produto);
+    public ResponseEntity<ProdutoGeral> alterar(@PathVariable Integer id, @RequestBody ProdutoGeral produto) {
+        ProdutoGeral produtoAlterado = produtoGeralService.alterar(id, produto);
+
+        return ResponseEntity.ok(produtoAlterado);
     }
 
     @PatchMapping(value = "/{id}")
-    public ProdutoGeral alterarCategoria(@PathVariable Integer id, @RequestBody String categoria) {
-        return produtoGeralService.trocarCategoria(id, categoria);
+    public ResponseEntity<ProdutoGeral> alterarCategoria(@PathVariable Integer id, @RequestBody String categoria) {
+        ProdutoGeral produtoAlterado = produtoGeralService.trocarCategoria(id, categoria);
+
+        return ResponseEntity.ok(produtoAlterado);
     }
 
 }

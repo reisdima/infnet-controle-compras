@@ -3,70 +3,58 @@ package br.edu.infnet.caiovincenzo.model.service;
 import br.edu.infnet.caiovincenzo.model.domain.ProdutoGeral;
 import br.edu.infnet.caiovincenzo.model.domain.exceptions.ProdutoInvalidoException;
 import br.edu.infnet.caiovincenzo.model.domain.exceptions.ProdutoNaoEncontradoException;
+import br.edu.infnet.caiovincenzo.model.repository.ProdutoGeralRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ProdutoGeralService implements CrudService<ProdutoGeral, Integer> {
 
-    private final Map<Integer, ProdutoGeral> mapa = new ConcurrentHashMap<>();
-    private final AtomicInteger nextId = new AtomicInteger(1);
+    private final ProdutoGeralRepository produtoGeralRepository;
+
+    public ProdutoGeralService(ProdutoGeralRepository produtoGeralRepository) {
+        this.produtoGeralRepository = produtoGeralRepository;
+    }
 
     @Override
     public ProdutoGeral incluir(ProdutoGeral produto) {
         validarProduto(produto);
-        produto.setId(nextId.getAndIncrement());
-        mapa.put(produto.getId(), produto);
-        return produto;
+        return produtoGeralRepository.save(produto);
     }
 
     @Override
     public ProdutoGeral alterar(Integer id, ProdutoGeral produto) {
-        if (id == null || id < 0) {
-            throw new IllegalArgumentException("O ID para alteração é inválido!");
-        }
-        validarProduto(produto);
         obterPorId(id);
-        produto.setId(id);
-        mapa.put(id, produto);
+        validarProduto(produto);
 
-        return produto;
+        produto.setId(id);
+        return produtoGeralRepository.save(produto);
     }
 
     @Override
     public ProdutoGeral obterPorId(Integer id) {
-        if (!mapa.containsKey(id)) {
-            throw new ProdutoNaoEncontradoException("O produto de id " + id + " não foi encontrado.");
+        if (id == null || id < 0) {
+            throw new IllegalArgumentException("O ID para alteração é inválido!");
         }
-        return mapa.get(id);
+        return produtoGeralRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("O produto com ID " + id + " não foi encontrado!"));
     }
 
     @Override
     public void excluir(Integer id) {
-        if (!mapa.containsKey(id)) {
-            throw new ProdutoNaoEncontradoException("O produto de id " + id + " não foi encontrado.");
-        }
-
-        mapa.remove(id);
+        ProdutoGeral produto = obterPorId(id);
+        produtoGeralRepository.delete(produto);
     }
 
     @Override
     public List<ProdutoGeral> obterLista() {
-        return new ArrayList<>(mapa.values());
+        return produtoGeralRepository.findAll();
     }
 
     public ProdutoGeral trocarCategoria(Integer id, String novaCategoria) {
         ProdutoGeral produto = obterPorId(id);
         produto.setCategoria(novaCategoria);
-        mapa.put(id, produto);
-
-        return null;
-
+        return produtoGeralRepository.save(produto);
     }
 
     private void validarProduto(ProdutoGeral produto) {
