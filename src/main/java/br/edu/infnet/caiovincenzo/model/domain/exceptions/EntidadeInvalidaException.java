@@ -1,10 +1,10 @@
 package br.edu.infnet.caiovincenzo.model.domain.exceptions;
 
-public class ProdutoInvalidoException extends RuntimeException {
+public class EntidadeInvalidaException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public ProdutoInvalidoException(String mensagem) {
+    public EntidadeInvalidaException(String mensagem) {
         super(mensagem);
     }
 }

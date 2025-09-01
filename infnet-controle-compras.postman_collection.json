@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "c4656c13-e4c4-41ea-be50-d12b15fb029b",
+		"name": "infnet-controle-compras",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10181134"
+	},
+	"item": [
+		{
+			"name": "Produto Geral",
+			"item": [
+				{
+					"name": "Obter produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produtosGerais",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosGerais"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter produto por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produtosGerais/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosGerais",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar produto geral",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":  \"Escova de dente\",\r\n    \"marca\": \"Oral B\",\r\n    \"codigoDeBarras\": \"55544666\",\r\n    \"quantidade\": \"1\",\r\n    \"unidade\": \"unidade\",\r\n    \"preco\":  16.44,\r\n    \"categoria\":  \"Higiene\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/produtosGerais",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosGerais"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":  \"Escova de dente\",\r\n    \"marca\": \"Colgate\",\r\n    \"codigoDeBarras\": \"111111\",\r\n    \"quantidade\": \"1\",\r\n    \"unidade\": \"unidade\",\r\n    \"preco\":  16.44,\r\n    \"categoria\":  \"Higiene\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/produtosGerais/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosGerais",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir produto geral",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produtosGerais/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosGerais",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar categoria",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "Higiene pessoal",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/produtosGerais/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosGerais",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produto Alimenticio",
+			"item": [
+				{
+					"name": "Obter produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produtosAlimenticios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosAlimenticios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter produto por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produtosAlimenticios/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosAlimenticios",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar produto alimentício",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":  \"Arroz\",\r\n    \"marca\": \"Tio João\",\r\n    \"codigoDeBarras\": \"1234567891234\",\r\n    \"quantidade\": \"5\",\r\n    \"unidade\": \"KG\",\r\n    \"preco\":  21.54,\r\n    \"perecivel\":  false,\r\n    \"diasValidade\": 180\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/produtosAlimenticios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosAlimenticios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":  \"Arroz\",\r\n    \"marca\": \"Tio João\",\r\n    \"codigoDeBarras\": \"7777777777\",\r\n    \"quantidade\": \"5\",\r\n    \"unidade\": \"kg\",\r\n    \"preco\":  21.54,\r\n    \"perecivel\":  false,\r\n    \"diasValidade\": 180\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/produtosAlimenticios/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosAlimenticios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir produto alimentício",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produtosAlimenticios/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosAlimenticios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar dias de validade",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "200",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/produtosAlimenticios/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produtosAlimenticios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Compra",
+			"item": [
+				{
+					"name": "Obter compras",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/compras",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter compras por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/compras/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar compra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"dataDaCompra\": \"2025-05-18\",\r\n        \"notaFiscal\": \"66549\",\r\n        \"produtos\": [\r\n            {\r\n                \"produto\": {\r\n                    \"nome\": \"Leite\",\r\n                    \"marca\": \"Addsa\",\r\n                    \"codigoDeBarras\": \"1234567891234\",\r\n                    \"quantidade\": 500,\r\n                    \"unidade\": \"ML\",\r\n                    \"perecivel\": true,\r\n                    \"diasValidade\": 7\r\n                },\r\n                \"preco\": 15.60,\r\n                \"quantidade\": 1\r\n            }\r\n            \r\n        ],\r\n        \"estabelecimento\": \"Atacadão 2\",\r\n        \"valor\": 157.18\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/compras",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar compra",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":  \"Arroz\",\r\n    \"marca\": \"Tio João\",\r\n    \"codigoDeBarras\": \"7777777777\",\r\n    \"quantidade\": \"5\",\r\n    \"unidade\": \"kg\",\r\n    \"preco\":  21.54,\r\n    \"perecivel\":  false,\r\n    \"diasValidade\": 180\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/compras/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Compra",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/compras/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter compra por nota fiscal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "200",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/compras/123456789789",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"compras",
+								"123456789789"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

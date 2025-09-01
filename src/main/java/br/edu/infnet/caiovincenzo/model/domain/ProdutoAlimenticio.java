@@ -1,11 +1,14 @@
 package br.edu.infnet.caiovincenzo.model.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Min;
 
 @Entity
 public class ProdutoAlimenticio extends Produto {
-
+    
     private boolean perecivel;
+
+    @Min(value = 0, message = "A validade em dias não pode ser negativa")
     private Integer diasValidade;
 
 

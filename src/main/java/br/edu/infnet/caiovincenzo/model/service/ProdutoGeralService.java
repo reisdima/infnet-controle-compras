@@ -1,8 +1,9 @@
 package br.edu.infnet.caiovincenzo.model.service;
 
 import br.edu.infnet.caiovincenzo.model.domain.ProdutoGeral;
-import br.edu.infnet.caiovincenzo.model.domain.exceptions.ProdutoInvalidoException;
-import br.edu.infnet.caiovincenzo.model.domain.exceptions.ProdutoNaoEncontradoException;
+import br.edu.infnet.caiovincenzo.model.domain.enums.Categoria;
+import br.edu.infnet.caiovincenzo.model.domain.exceptions.EntidadeInvalidaException;
+import br.edu.infnet.caiovincenzo.model.domain.exceptions.EntidadeNaoEncontradaException;
 import br.edu.infnet.caiovincenzo.model.repository.ProdutoGeralRepository;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class ProdutoGeralService implements CrudService<ProdutoGeral, Integer> {
         if (id == null || id < 0) {
             throw new IllegalArgumentException("O ID para alteração é inválido!");
         }
-        return produtoGeralRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("O produto com ID " + id + " não foi encontrado!"));
+        return produtoGeralRepository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("O produto com ID " + id + " não foi encontrado!"));
     }
 
     @Override
@@ -51,7 +52,7 @@ public class ProdutoGeralService implements CrudService<ProdutoGeral, Integer> {
         return produtoGeralRepository.findAll();
     }
 
-    public ProdutoGeral trocarCategoria(Integer id, String novaCategoria) {
+    public ProdutoGeral trocarCategoria(Integer id, Categoria novaCategoria) {
         ProdutoGeral produto = obterPorId(id);
         produto.setCategoria(novaCategoria);
         return produtoGeralRepository.save(produto);
@@ -62,7 +63,7 @@ public class ProdutoGeralService implements CrudService<ProdutoGeral, Integer> {
             throw new IllegalArgumentException("O produto não pode estar nulo!");
         }
         if (produto.getNome() == null || produto.getNome().isBlank()) {
-            throw new ProdutoInvalidoException("O nome do produto não pode estar vazio!");
+            throw new EntidadeInvalidaException("O nome do produto não pode estar vazio!");
         }
     }
 

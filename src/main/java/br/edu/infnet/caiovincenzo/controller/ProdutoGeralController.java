@@ -1,7 +1,9 @@
 package br.edu.infnet.caiovincenzo.controller;
 
 import br.edu.infnet.caiovincenzo.model.domain.ProdutoGeral;
+import br.edu.infnet.caiovincenzo.model.domain.enums.Categoria;
 import br.edu.infnet.caiovincenzo.model.service.ProdutoGeralService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +46,7 @@ public class ProdutoGeralController {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoGeral> incluir(@RequestBody ProdutoGeral produto) {
+    public ResponseEntity<ProdutoGeral> incluir(@Valid  @RequestBody ProdutoGeral produto) {
         ProdutoGeral novoProduto = produtoGeralService.incluir(produto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(novoProduto);
@@ -59,7 +61,7 @@ public class ProdutoGeralController {
 
     @PatchMapping(value = "/{id}")
     public ResponseEntity<ProdutoGeral> alterarCategoria(@PathVariable Integer id, @RequestBody String categoria) {
-        ProdutoGeral produtoAlterado = produtoGeralService.trocarCategoria(id, categoria);
+        ProdutoGeral produtoAlterado = produtoGeralService.trocarCategoria(id, Categoria.valueOf(categoria));
 
         return ResponseEntity.ok(produtoAlterado);
     }

@@ -1,16 +1,19 @@
 package br.edu.infnet.caiovincenzo;
 
-import br.edu.infnet.caiovincenzo.model.domain.Produto;
 import br.edu.infnet.caiovincenzo.model.domain.ProdutoGeral;
+import br.edu.infnet.caiovincenzo.model.domain.enums.Categoria;
+import br.edu.infnet.caiovincenzo.model.domain.enums.TipoUnidade;
 import br.edu.infnet.caiovincenzo.model.service.ProdutoGeralService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.List;
 
+@Order(2)
 @Component
 public class ProdutoGeralLoader implements ApplicationRunner {
     private final ProdutoGeralService produtoGeralService;
@@ -37,9 +40,8 @@ public class ProdutoGeralLoader implements ApplicationRunner {
             produto.setMarca(campos[1]);
             produto.setCodigoDeBarras(campos[2]);
             produto.setQuantidade(Integer.valueOf(campos[3]));
-            produto.setUnidade(campos[4]);
-            produto.setPreco(Double.parseDouble(campos[5]));
-            produto.setCategoria(campos[6]);
+            produto.setUnidade(TipoUnidade.valueOf(campos[4]));
+            produto.setCategoria(Categoria.valueOf(campos[5]));
 
 
             produtoGeralService.incluir(produto);

@@ -1,8 +1,8 @@
 package br.edu.infnet.caiovincenzo.model.service;
 
 import br.edu.infnet.caiovincenzo.model.domain.ProdutoAlimenticio;
-import br.edu.infnet.caiovincenzo.model.domain.exceptions.ProdutoInvalidoException;
-import br.edu.infnet.caiovincenzo.model.domain.exceptions.ProdutoNaoEncontradoException;
+import br.edu.infnet.caiovincenzo.model.domain.exceptions.EntidadeInvalidaException;
+import br.edu.infnet.caiovincenzo.model.domain.exceptions.EntidadeNaoEncontradaException;
 import br.edu.infnet.caiovincenzo.model.repository.ProdutoAlimenticioRepository;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class ProdutoAlimenticioService implements CrudService<ProdutoAlimenticio
         if (id == null || id < 0) {
             throw new IllegalArgumentException("O ID para alteração é inválido!");
         }
-        return produtoAlimenticioRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("O produto com ID " + id + " não foi encontrado!"));
+        return produtoAlimenticioRepository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("O produto com ID " + id + " não foi encontrado!"));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ProdutoAlimenticioService implements CrudService<ProdutoAlimenticio
             throw new IllegalArgumentException("O produto não pode estar nulo!");
         }
         if (produto.getNome() == null || produto.getNome().isBlank()) {
-            throw new ProdutoInvalidoException("O nome do produto não pode estar vazio!");
+            throw new EntidadeInvalidaException("O nome do produto não pode estar vazio!");
         }
     }
 }

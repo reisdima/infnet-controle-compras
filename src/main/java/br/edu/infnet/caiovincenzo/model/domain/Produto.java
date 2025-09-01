@@ -1,27 +1,48 @@
 package br.edu.infnet.caiovincenzo.model.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import br.edu.infnet.caiovincenzo.model.domain.enums.TipoUnidade;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
-@MappedSuperclass
-public abstract class Produto {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Produto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotBlank(message = "O nome do produto é obrigatório")
     private String nome;
+
     private String marca;
+
+    // Feature 4 validação complexa
+    @Pattern( regexp = "^\\d{13}$", message = "O código de barras deve conter exatamente 13 dígitos")
     private String codigoDeBarras;
+
+    @NotNull(message = "A quantidade relacionada ao produto é obrigatória ")
+    @Min(value = 0, message = "A quantidade não pode ser negativa")
     private Integer quantidade;
-    private String unidade;
-    private double preco;
+
+    @NotNull(message = "A unidade do produto é obrigatória")
+    @Enumerated(EnumType.STRING)
+    private TipoUnidade unidade;
+
+    @OneToMany(mappedBy = "produto")
+    private List<Item> itens = new ArrayList<>();
 
 
     @Override
     public String toString() {
-        return String.format(" - %d, %s, %s, %s, %s, %s, %.2f", id, nome, marca, codigoDeBarras, quantidade, unidade, preco);
+        return String.format(" - %d, %s, %s, %s, %s, %s ", id, nome, marca, codigoDeBarras, quantidade, unidade);
     }
 
     public abstract String obterTipo();
@@ -58,20 +79,12 @@ public abstract class Produto {
         this.codigoDeBarras = codigoDeBarras;
     }
 
-    public String getUnidade() {
+    public TipoUnidade getUnidade() {
         return unidade;
     }
 
-    public void setUnidade(String unidade) {
+    public void setUnidade(TipoUnidade unidade) {
         this.unidade = unidade;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
     }
 
     public Integer getQuantidade() {

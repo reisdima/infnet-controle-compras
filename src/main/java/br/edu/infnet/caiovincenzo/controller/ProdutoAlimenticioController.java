@@ -2,6 +2,7 @@ package br.edu.infnet.caiovincenzo.controller;
 
 import br.edu.infnet.caiovincenzo.model.domain.ProdutoAlimenticio;
 import br.edu.infnet.caiovincenzo.model.service.ProdutoAlimenticioService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +45,7 @@ public class ProdutoAlimenticioController {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoAlimenticio> incluir(@RequestBody ProdutoAlimenticio produto) {
+    public ResponseEntity<ProdutoAlimenticio> incluir(@Valid  @RequestBody ProdutoAlimenticio produto) {
         ProdutoAlimenticio novoProduto = produtoAlimenticioService.incluir(produto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(novoProduto);
